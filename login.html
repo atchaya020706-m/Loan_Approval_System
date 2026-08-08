@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 400px;
+            max-width: 90%;
+            margin: 80px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            color: #4b2aad;
+            margin-bottom: 25px;
+        }
+
+        .login-container input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .login-container input:focus {
+            border-color: #6c5ce7;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #4b2aad;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #382080;
+        }
+
+        .admin-login-btn {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-top: 15px;
+            border-radius: 8px;
+            background: #6c5ce7;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .admin-login-btn:hover {
+            background: #5847c7;
+        }
+
+        .register-link {
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: #4b2aad;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #c0392b;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+
+        <!-- USER LOGIN -->
+
+        <h1>🔐 User Login</h1>
+
+
+        {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST" autocomplete="off">
+
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                autocomplete="off"
+                required
+            >
+
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+                🔐 Login
+            </button>
+
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <div class="register-link">
+
+            <p>
+                Don't have an account?
+
+                <a href="{{ url_for('register') }}">
+                    Register
+                </a>
+            </p>
+
+        </div>
+
+
+        <hr style="margin: 25px 0;">
+
+
+        <!-- ADMIN LOGIN -->
+
+        <a
+            href="{{ url_for('admin_login') }}"
+            class="admin-login-btn"
+        >
+            🛡️ Admin Login
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>
