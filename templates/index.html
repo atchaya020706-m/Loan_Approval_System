@@ -1,1 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Loan Approval Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ========================= -->
+    <!-- PAGE TITLE -->
+    <!-- ========================= -->
+
+    <h1>
+        🏦 Loan Approval Prediction System
+    </h1>
+
+    <p class="subtitle">
+        Machine Learning Based Loan Approval Prediction
+    </p>
+
+
+    <!-- ========================= -->
+    <!-- LOAN FORM -->
+    <!-- ========================= -->
+
+    <form
+        action="{{ url_for('predict') }}"
+        method="POST"
+        autocomplete="off"
+    >
+
+
+        <!-- ========================= -->
+        <!-- PERSONAL DETAILS -->
+        <!-- ========================= -->
+
+        <h2>
+            👤 Personal Details
+        </h2>
+
+
+        <label>
+            Full Name
+        </label>
+
+        <input
+            type="text"
+            name="full_name"
+            placeholder="Enter Full Name"
+            required
+        >
+
+
+        <label>
+            Age
+        </label>
+
+        <input
+            type="number"
+            name="age"
+            placeholder="Enter Age"
+            required
+        >
+
+
+        <label>
+            Gender
+        </label>
+
+        <select
+            name="gender"
+            required
+        >
+
+            <option value="">
+                Select Gender
+            </option>
+
+            <option value="Male">
+                Male
+            </option>
+
+            <option value="Female">
+                Female
+            </option>
+
+        </select>
+
+
+        <label>
+            Marital Status
+        </label>
+
+        <select
+            name="marital_status"
+            required
+        >
+
+            <option value="">
+                Select Status
+            </option>
+
+            <option value="Single">
+                Single
+            </option>
+
+            <option value="Married">
+                Married
+            </option>
+
+        </select>
+
+
+        <label>
+            Mobile Number
+        </label>
+
+        <input
+            type="text"
+            name="mobile"
+            placeholder="Enter Mobile Number"
+            required
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            required
+        >
+
+
+        <label>
+            Address
+        </label>
+
+        <textarea
+            name="address"
+            placeholder="Enter Address"
+            required
+        ></textarea>
+
+
+        <!-- ========================= -->
+        <!-- EMPLOYMENT DETAILS -->
+        <!-- ========================= -->
+
+        <h2>
+            💼 Employment Details
+        </h2>
+
+
+        <label>
+            Employment Type
+        </label>
+
+        <select
+            name="employment_type"
+            required
+        >
+
+            <option value="">
+                Select Type
+            </option>
+
+            <option value="Salaried">
+                Salaried
+            </option>
+
+            <option value="Self Employed">
+                Self Employed
+            </option>
+
+            <option value="Business">
+                Business
+            </option>
+
+        </select>
+
+
+        <label>
+            Monthly Income
+        </label>
+
+        <input
+            type="number"
+            name="monthly_income"
+            placeholder="Enter Monthly Income"
+            min="0"
+            required
+        >
+
+
+        <!-- ========================= -->
+        <!-- LOAN DETAILS -->
+        <!-- ========================= -->
+
+        <h2>
+            💰 Loan Details
+        </h2>
+
+
+        <label>
+            Loan Type
+        </label>
+
+        <select
+            name="loan_type"
+            required
+        >
+
+            <option value="">
+                Select Loan Type
+            </option>
+
+            <option value="Personal Loan">
+                Personal Loan
+            </option>
+
+            <option value="Home Loan">
+                Home Loan
+            </option>
+
+            <option value="Education Loan">
+                Education Loan
+            </option>
+
+            <option value="Vehicle Loan">
+                Vehicle Loan
+            </option>
+
+            <option value="Business Loan">
+                Business Loan
+            </option>
+
+            <option value="Medical Loan">
+                Medical Loan
+            </option>
+
+        </select>
+
+
+        <label>
+            Loan Amount
+        </label>
+
+        <input
+            type="number"
+            name="loan_amount"
+            placeholder="Enter Loan Amount"
+            min="0"
+            required
+        >
+
+
+        <label>
+            Loan Tenure (Years)
+        </label>
+
+        <input
+            type="number"
+            name="loan_tenure"
+            placeholder="Enter Tenure"
+            min="1"
+            required
+        >
+
+
+        <label>
+            Loan Purpose
+        </label>
+
+        <select
+            name="purpose"
+            required
+        >
+
+            <option value="">
+                Select Purpose
+            </option>
+
+            <option value="House Construction">
+                House Construction
+            </option>
+
+            <option value="Higher Studies">
+                Higher Studies
+            </option>
+
+            <option value="Vehicle Purchase">
+                Vehicle Purchase
+            </option>
+
+            <option value="Business Development">
+                Business Development
+            </option>
+
+            <option value="Medical Expenses">
+                Medical Expenses
+            </option>
+
+            <option value="Personal Expenses">
+                Personal Expenses
+            </option>
+
+        </select>
+
+
+        <!-- ========================= -->
+        <!-- FINANCIAL DETAILS -->
+        <!-- ========================= -->
+
+        <h2>
+            💳 Financial Details
+        </h2>
+
+
+        <label>
+            Credit Score
+        </label>
+
+        <input
+            type="number"
+            name="credit_score"
+            placeholder="Enter Credit Score"
+            min="0"
+            max="900"
+            required
+        >
+
+
+        <!-- ========================= -->
+        <!-- SUBMIT -->
+        <!-- ========================= -->
+
+        <button type="submit">
+
+            🔍 Predict Loan Status
+
+        </button>
+
+
+    </form>
+
+
+    <!-- ========================= -->
+    <!-- BACK TO DASHBOARD -->
+    <!-- ========================= -->
+
+    <br>
+
+    <a
+        href="{{ url_for('dashboard') }}"
+        style="
+            display:block;
+            text-align:center;
+            margin-top:15px;
+        "
+    >
+        ← Back to Dashboard
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
