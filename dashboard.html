@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .dashboard-buttons {
+            width: 250px;
+            margin: 20px auto;
+        }
+
+        .dashboard-buttons a {
+            display: block;
+            text-decoration: none;
+            margin: 12px 0;
+        }
+
+        .dashboard-buttons button {
+            width: 100%;
+            padding: 12px;
+            cursor: pointer;
+        }
+
+        .loan-box {
+            width: 100%;
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.12);
+            box-sizing: border-box;
+        }
+
+        .loan-box h2 {
+            margin-top: 0;
+            text-align: left;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th {
+            background: #4b2aad;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f2ff;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>🏦 User Dashboard</h1>
+
+
+    <h2>
+        Welcome, {{ name }} 👋
+    </h2>
+
+
+    <!-- BUTTONS -->
+
+    <div class="dashboard-buttons">
+
+        <a href="{{ url_for('loan') }}">
+            <button type="button">
+                📝 Apply New Loan
+            </button>
+        </a>
+
+        <a href="{{ url_for('emi') }}">
+            <button type="button">
+                🧮 EMI Calculator
+            </button>
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            <button type="button">
+                🚪 Logout
+            </button>
+        </a>
+
+    </div>
+
+
+    <!-- MY LOAN APPLICATIONS -->
+
+    <div class="loan-box">
+
+        <h2>
+            📋 My Loan Applications
+        </h2>
+
+
+        {% if loans %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Loan Type</th>
+                        <th>Purpose</th>
+                        <th>Age</th>
+                        <th>Monthly Income</th>
+                        <th>Loan Amount</th>
+                        <th>Credit Score</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for loan in loans %}
+
+                    <tr>
+
+                        <td>{{ loan["loan_type"] }}</td>
+
+                        <td>{{ loan["purpose"] }}</td>
+
+                        <td>{{ loan["age"] }}</td>
+
+                        <td>₹{{ loan["monthly_income"] }}</td>
+
+                        <td>₹{{ loan["loan_amount"] }}</td>
+
+                        <td>{{ loan["credit_score"] }}</td>
+
+                        <td>{{ loan["result"] }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+            <p style="text-align:center;">
+                No loan applications found.
+            </p>
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

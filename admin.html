@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+        }
+
+        .card h2 {
+            margin: 0;
+            color: #4b2aad;
+            font-size: 30px;
+        }
+
+        .card p {
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1200px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #4b2aad;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f2ff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #4b2aad;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #382080;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #4b2aad;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #382080;
+        }
+
+        .user-id {
+            font-weight: bold;
+            color: #4b2aad;
+        }
+
+        @media (max-width: 800px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         ADMIN DASHBOARD
+    ========================== -->
+
+    <h1>
+        🏦 Admin Dashboard
+    </h1>
+
+
+    <h2>
+        Loan Statistics
+    </h2>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================== -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>
+                {{ total_users }}
+            </h2>
+
+            <p>
+                Total Users
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                {{ total_loans }}
+            </h2>
+
+            <p>
+                Total Applications
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                {{ approved }}
+            </h2>
+
+            <p>
+                Approved
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                {{ rejected }}
+            </h2>
+
+            <p>
+                Rejected
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <br>
+
+
+    <!-- =========================
+         LOAN APPLICATIONS
+    ========================== -->
+
+    <h2>
+        📋 Loan Applications
+    </h2>
+
+
+    <div class="table-container">
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>Loan ID</th>
+
+                    <th>User ID</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Loan Type</th>
+
+                    <th>Amount</th>
+
+                    <th>Credit Score</th>
+
+                    <th>Eligibility</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            {% if loans %}
+
+
+                {% for loan in loans %}
+
+
+                <tr>
+
+
+                    <!-- LOAN ID -->
+
+                    <td>
+                        {{ loan["id"] }}
+                    </td>
+
+
+                    <!-- USER ID -->
+
+                    <td class="user-id">
+
+                        {{ loan["user_id"] }}
+
+                    </td>
+
+
+                    <!-- NAME -->
+
+                    <td>
+
+                        {{ loan["full_name"] }}
+
+                    </td>
+
+
+                    <!-- EMAIL -->
+
+                    <td>
+
+                        {{ loan["email"] }}
+
+                    </td>
+
+
+                    <!-- LOAN TYPE -->
+
+                    <td>
+
+                        {{ loan["loan_type"] }}
+
+                    </td>
+
+
+                    <!-- AMOUNT -->
+
+                    <td>
+
+                        ₹{{ loan["loan_amount"] }}
+
+                    </td>
+
+
+                    <!-- CREDIT SCORE -->
+
+                    <td>
+
+                        {{ loan["credit_score"] }}
+
+                    </td>
+
+
+                    <!-- ELIGIBILITY -->
+
+                    <td>
+
+                        {{ loan["eligibility_score"] }}%
+
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        {{ loan["result"] }}
+
+                    </td>
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+
+                        <a
+                            href="{{ url_for('approve', id=loan['id']) }}"
+                            class="btn"
+                        >
+
+                            ✅ Approve
+
+                        </a>
+
+
+                        <br>
+                        <br>
+
+
+                        <a
+                            href="{{ url_for('reject', id=loan['id']) }}"
+                            class="btn"
+                        >
+
+                            ❌ Reject
+
+                        </a>
+
+
+                    </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <tr>
+
+                    <td colspan="10">
+
+                        No loan applications found.
+
+                    </td>
+
+                </tr>
+
+
+            {% endif %}
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+    <br>
+    <br>
+
+
+    <!-- =========================
+         ADMIN LOGOUT
+    ========================== -->
+
+    <a
+        href="{{ url_for('admin_logout') }}"
+        class="logout-btn"
+    >
+
+        🚪 Admin Logout
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Loan Prediction Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container result-page">
+
+
+    <h1>🏦 Loan Prediction Result</h1>
+
+
+    <hr>
+
+
+    {% if "Approved" in result %}
+
+    <div class="approved-box">
+
+        <h2>{{ result }}</h2>
+
+        <p>
+            Congratulations! Your loan application has been approved.
+        </p>
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="rejected-box">
+
+        <h2>{{ result }}</h2>
+
+        <p>
+            Sorry! Your loan application has been rejected.
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+
+
+    <h3>Loan Type</h3>
+
+    <p>{{ loan_type }}</p>
+
+
+
+    <h3>Loan Purpose</h3>
+
+    <p>{{ purpose }}</p>
+
+
+
+
+    <br>
+
+
+    <a href="/dashboard" class="btn">
+        📊 Back to Dashboard
+    </a>
+
+
+    <br><br>
+
+
+    <a href="/loan" class="btn">
+        ➕ Apply Another Loan
+    </a>
+
+
+
+</div>
+
+
+</body>
+
+</html>

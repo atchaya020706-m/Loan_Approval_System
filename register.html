@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Register</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>📝 Create Account</h1>
+
+
+
+<form method="POST" action="/register" autocomplete="off">
+
+
+
+<label>
+Name
+</label>
+
+<input type="text"
+       name="name"
+       placeholder="Enter Name"
+       autocomplete="off"
+       required>
+
+
+
+
+<label>
+Email
+</label>
+
+<input type="email"
+       name="email"
+       placeholder="Enter Email"
+       autocomplete="off"
+       required>
+
+
+
+
+<label>
+Password
+</label>
+
+<input type="password"
+       name="password"
+       placeholder="Enter Password"
+       autocomplete="new-password"
+       required>
+
+
+
+
+
+<button type="submit">
+Register
+</button>
+
+
+
+</form>
+
+
+
+
+<p>
+Already have account?
+<a href="/login">
+Login
+</a>
+</p>
+
+
+
+</div>
+
+
+</body>
+
+</html>

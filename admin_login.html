@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+                135deg,
+                #6c5ce7,
+                #4b2aad
+            );
+        }
+
+        .admin-container {
+            width: 400px;
+            max-width: 90%;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        .admin-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #4b2aad;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 9px 0;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #6c5ce7;
+        }
+
+        .admin-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 9px;
+            background: #6c5ce7;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .admin-btn:hover {
+            background: #4b2aad;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 18px;
+            color: #4b2aad;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #c0392b;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="admin-container">
+
+
+        <div class="admin-icon">
+            🛡️
+        </div>
+
+
+        <h1>Admin Login</h1>
+
+
+        <p class="subtitle">
+            Login to Admin Dashboard
+        </p>
+
+
+        {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            autocomplete="off"
+        >
+
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Admin Username"
+                autocomplete="off"
+                required
+            >
+
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Admin Password"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="admin-btn"
+            >
+                🔐 Admin Login
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="{{ url_for('login') }}"
+            class="back-btn"
+        >
+            ← Back to User Login
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>
